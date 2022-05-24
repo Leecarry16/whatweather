@@ -11,11 +11,11 @@ import sys
 import shutil
 import re
 
+process = "C:/Users/user/Desktop/School/AI_Build_Project_test/Term Projecct/Program/이미지 분류 진행과정.xlsx"
 im_path = "C:/Users/user/Desktop/School/AI_Build_Project_test/Term Projecct/Program/rename"
 file_list = os.listdir(im_path)
 
 pm_dir = ["0105", "0610", "1115", "1620", "2125", "2630", "3135", "3640", "4145", "4650", "5155", "5660", "6165", "6670", "7175", "7680", "8185", "8690", "9195", "9600", "nan", "error"]
-
 
 pm_path = "C:/Users/user/Desktop/School/AI_Build_Project_test/Term Projecct/Program/PM10 Class/{}"
 
@@ -25,15 +25,12 @@ def get_files_count(folder_path):
 	dirListing = os.listdir(folder_path)
 	return len(dirListing)
 
-
 sum_before = 0
-for pm_dir_num in range(21):
+for pm_dir_num in range(22):
 	print(pm_dir[pm_dir_num], get_files_count(pm_path.format(pm_dir[pm_dir_num])))
 	sum_before = sum_before + int(get_files_count(pm_path.format(pm_dir[pm_dir_num])))
 
 print("분류 전 폴더 내 파일 개수: ", sum_before)
-
-
 
 pm_exc = pd.read_excel("C:/Users/user/Desktop/School/AI_Build_Project_test/Term Projecct/Program/PM10_20220522.xlsx")
 
@@ -57,19 +54,20 @@ for file in file_list:
 					try:
 						for pm_cls in range(20):
 							if (1 + (pm_cls*5)) <= pm_cell <= (5 + (pm_cls * 5)):
-								shutil.move("C:/Users/user/Desktop\School/AI_Build_Project_test/Term Projecct/Program/rename/{}".format(file_list[file]), pm_path.format(pm_dir[pm_cls]))
+								shutil.move("C:/Users/user/Desktop\School/AI_Build_Project_test/Term Projecct/Program/rename/{}".format(file_list[num]), pm_path.format(pm_dir[pm_cls]))
 							else:
-								shutil.move("C:/Users/user/Desktop\School/AI_Build_Project_test/Term Projecct/Program/rename/{}".format(file_list[file]), pm_path.format("nan"))
+								shutil.move("C:/Users/user/Desktop\School/AI_Build_Project_test/Term Projecct/Program/rename/{}".format(file_list[num]), pm_path.format("nan"))
 					except shutil.Error:
-						shutil.move("C:/Users/user/Desktop\School/AI_Build_Project_test/Term Projecct/Program/rename/{}".format(file_list[file]), pm_path.format("error"))
+						pass
+					num = num +1
 
 print("분류한 파일 개수: ", num)
 
 #print(pm_exc)
 
-rb = load_workbook("C:/Users/user/Desktop/School/AI_Build_Project_test/Term Projecct/Program/이미지 분류 진행과정.xlsx")
+rb = load_workbook(process)
 ws = rb['Sheet1']
-wb = openpyxl.load_workbook("C:/Users/user/Desktop/School/AI_Build_Project_test/Term Projecct/Program/이미지 분류 진행과정.xlsx")
+wb = openpyxl.load_workbook(process)
 
 Sheet1 = wb.active 
 
@@ -82,6 +80,11 @@ for pm_dir_num in range(22):
 Sheet1['B24'] = sum_after
 print("분류 후 폴더 내 파일 개수: ",sum_after)
 
-wb.save("C:/Users/user/Desktop/School/AI_Build_Project_test/Term Projecct/Program/이미지 분류 진행과정.xlsx")
+sum_before = 0
+for pm_dir_num in range(22):
+	print(pm_dir[pm_dir_num], get_files_count(pm_path.format(pm_dir[pm_dir_num])))
+	sum_before = sum_before + int(get_files_count(pm_path.format(pm_dir[pm_dir_num])))
+
+wb.save(process)
 
 
