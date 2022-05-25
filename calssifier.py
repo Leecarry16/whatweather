@@ -14,6 +14,7 @@ import re
 process = "C:/Users/user/Desktop/School/AI_Build_Project_test/Term Projecct/Program/이미지 분류 진행과정.xlsx"
 im_path = "C:/Users/user/Desktop/School/AI_Build_Project_test/Term Projecct/Program/rename"
 file_list = os.listdir(im_path)
+rename_path = "C:/Users/user/Desktop\School/AI_Build_Project_test/Term Projecct/Program/rename/{}"
 
 pm_dir = ["0105", "0610", "1115", "1620", "2125", "2630", "3135", "3640", "4145", "4650", "5155", "5660", "6165", "6670", "7175", "7680", "8185", "8690", "9195", "9600", "nan", "error"]
 
@@ -54,11 +55,15 @@ for file in file_list:
 					try:
 						for pm_cls in range(20):
 							if (1 + (pm_cls*5)) <= pm_cell <= (5 + (pm_cls * 5)):
-								shutil.move("C:/Users/user/Desktop\School/AI_Build_Project_test/Term Projecct/Program/rename/{}".format(file_list[num]), pm_path.format(pm_dir[pm_cls]))
-							else:
-								shutil.move("C:/Users/user/Desktop\School/AI_Build_Project_test/Term Projecct/Program/rename/{}".format(file_list[num]), pm_path.format("nan"))
+								shutil.move(rename_path.format(file_list[num]), pm_path.format(pm_dir[pm_cls]))
+							elif pm_cell == float('nan'):
+								shutil.move(rename_path.format(file_list[num]), pm_path.format("nan"))
 					except shutil.Error:
-						pass
+						try:
+							shutil.move(rename_path.format(file_list[num]), pm_path.format("error"))
+						except shutil.Error:
+							os.remove(rename_path.format(file_list[num]))
+
 					num = num +1
 
 print("분류한 파일 개수: ", num)
