@@ -1,15 +1,16 @@
 ## Written for classficate the image data and rewrite Excel data
-## Contact by kesm03122@gmail.com or Kakaotalk ID: Leecarry16
+## Contact by kesm03122@gmail.com
 
-from importlib.resources import path
-import os
 from openpyxl import Workbook, load_workbook
-import openpyxl
+from importlib.resources import path
+
 import pandas as pd
+import openpyxl
 import hashlib
-import sys
 import shutil
+import sys
 import re
+import os
 
 process = "C:/Users/user/Desktop/School/AI_Build_Project_test/Term Projecct/Program/이미지 분류 진행과정.xlsx"
 im_path = "C:/Users/user/Desktop/School/AI_Build_Project_test/Term Projecct/Program/rename"
@@ -37,6 +38,7 @@ pm_exc = pd.read_excel("C:/Users/user/Desktop/School/AI_Build_Project_test/Term 
 
 num = 0
 test_list = []
+
 for file in file_list:
 	name = file.split(',')[0]
 	name_y = name[0:4]
