@@ -1,23 +1,25 @@
-## Written for classficate the image data and rewrite Excel data
-## Contact by kesm03122@gmail.com or Kakaotalk ID: Leecarry16
+'''
+Written for classficate the image data and rewrite Excel data
+Contact by kesm03122@gmail.com
+'''
 
-from importlib.resources import path
-import os
 from openpyxl import Workbook, load_workbook
-import openpyxl
+from importlib.resources import path
+
 import pandas as pd
+import openpyxl
 import hashlib
-import sys
 import shutil
+import sys
 import re
+import os
 
 process = "C:/Users/user/Desktop/School/AI_Build_Project_test/Term Projecct/Program/이미지 분류 진행과정.xlsx"
 im_path = "C:/Users/user/Desktop/School/AI_Build_Project_test/Term Projecct/Program/rename"
-file_list = os.listdir(im_path)
 rename_path = "C:/Users/user/Desktop\School/AI_Build_Project_test/Term Projecct/Program/rename/{}"
+file_list = os.listdir(im_path)
 
 pm_dir = ["0105", "0610", "1115", "1620", "2125", "2630", "3135", "3640", "4145", "4650", "5155", "5660", "6165", "6670", "7175", "7680", "8185", "8690", "9195", "9600", "nan", "error"]
-
 pm_path = "C:/Users/user/Desktop/School/AI_Build_Project_test/Term Projecct/Program/PM10 Class/{}"
 
 #print(dataframeXlsx)
@@ -37,6 +39,7 @@ pm_exc = pd.read_excel("C:/Users/user/Desktop/School/AI_Build_Project_test/Term 
 
 num = 0
 test_list = []
+
 for file in file_list:
 	name = file.split(',')[0]
 	name_y = name[0:4]
