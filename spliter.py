@@ -20,7 +20,7 @@ def get_files_count(folder_path):
 	dirListing = os.listdir(folder_path)
 	return len(dirListing)
 
-for i in range(0, 19):
+for i in range(0, 20):
     pm_path_dir = pm_path.format(pm_dir[i])                         ## Directory of Orginal Class
     file_amount = get_files_count(pm_path.format(pm_dir[i]))        ## Files Amount of Original CLass
     file_list = os.listdir(pm_path_dir)                             ## File's name of Original Class
